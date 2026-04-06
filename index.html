@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>LabXpert AI - Smart Lab Record Generator</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(to right, #e3f2fd, #ffffff);
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 60%;
+            margin: 40px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+        }
+
+        h1 {
+            color: #0d47a1;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            padding: 10px 20px;
+            background: #0d47a1;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1565c0;
+        }
+
+        .output {
+            margin-top: 20px;
+            background: #f1f8ff;
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        pre {
+            background: #222;
+            color: #0f0;
+            padding: 10px;
+            border-radius: 6px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>🤖 LabXpert AI</h1>
+    <p><b>Smart Lab Record Generator</b></p>
+
+    <input type="text" id="experiment" placeholder="Enter Experiment Name">
+
+    <select id="language">
+        <option>Java</option>
+        <option>Python</option>
+        <option>C</option>
+    </select>
+
+    <br>
+    <button onclick="generateRecord()">Generate Record</button>
+
+    <div class="output" id="result"></div>
+</div>
+
+<script>
+function generateRecord() {
+    let exp = document.getElementById("experiment").value.trim();
+    let lang = document.getElementById("language").value;
+
+    if (exp === "") {
+        alert("Please enter experiment name!");
+        return;
+    }
+
+    let code = "";
+
+    if (lang === "Java") {
+        code = `
+class Example {
+    public static void main(String[] args) {
+        System.out.println("${exp} executed successfully");
+    }
+}`;
+    } else if (lang === "Python") {
+        code = `
+print("${exp} executed successfully")
+`;
+    } else {
+        code = `
+#include <stdio.h>
+int main() {
+    printf("${exp} executed successfully");
+    return 0;
+}`;
+    }
+
+    let output = `
+<h2>📘 Experiment: ${exp}</h2>
+
+<h3>🎯 Aim</h3>
+<p>To implement <b>${exp}</b> using <b>${lang}</b>.</p>
+
+<h3>📖 Theory</h3>
+<p>${exp} is an important concept in programming used to solve problems efficiently. It helps in improving logic building and coding skills.</p>
+
+<h3>📝 Algorithm</h3>
+<ol>
+<li>Start the program</li>
+<li>Input required data</li>
+<li>Apply logic for ${exp}</li>
+<li>Display result</li>
+<li>Stop the program</li>
+</ol>
+
+<h3>💻 Code (${lang})</h3>
+<pre>${code}</pre>
+
+<h3>📊 Output</h3>
+<p>${exp} executed successfully</p>
+
+<h3>❓ Viva Questions</h3>
+<ul>
+<li>What is ${exp}?</li>
+<li>Explain the working of ${exp}.</li>
+<li>Where is ${exp} used?</li>
+<li>What are the advantages of ${exp}?</li>
+</ul>
+`;
+
+    document.getElementById("result").innerHTML = output;
+}
+</script>
+
+</body>
+</html>
